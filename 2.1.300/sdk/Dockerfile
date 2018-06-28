@@ -1,5 +1,5 @@
 # escape=`
-FROM microsoft/dotnet:2.1-sdk
+FROM microsoft/dotnet:2.1.300-sdk
 
 MAINTAINER dealdiane@netpotential.co.nz
 
