@@ -32,7 +32,6 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
         exit 1; `
     }; `
     `
-    Expand-Archive git.zip -DestinationPath "C:/git"; `
+    Expand-Archive git.zip -DestinationPath C:\git; `
     Move-Item C:\git ${env:ProgramFiles}\git; `
-    Remove-Item -Force C:\git; `
     Remove-Item -Force git.zip;
