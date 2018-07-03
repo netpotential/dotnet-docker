@@ -1,7 +1,7 @@
 # escape=`
-MAINTAINER dealdiane@netpotential.co.nz
-
 FROM microsoft/windowsservercore:1803
+
+MAINTAINER dealdiane@netpotential.co.nz
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
