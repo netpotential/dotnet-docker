@@ -19,10 +19,9 @@ RUN Invoke-WebRequest $Env:DOTNET_SDK_DOWNLOAD_URL -OutFile dotnet.zip; `
     Expand-Archive dotnet.zip -DestinationPath $Env:ProgramFiles\dotnet; `
     Remove-Item -Force dotnet.zip
 
-# In order to set system PATH, ContainerAdministrator must be used
+# Run all commands as Administrator
 USER ContainerAdministrator 
 RUN setx /M PATH $($Env:PATH + ';' + $Env:ProgramFiles + '\dotnet;' + $Env:ProgramFiles + '\nodejs;' + $Env:ProgramFiles + '\git\cmd')
-USER ContainerUser
 
 # Install package managers
 RUN npm install -g gulp bower yarn
@@ -34,3 +33,6 @@ RUN New-Item -Type Directory warmup; `
     dotnet new; `
     cd ..; `
     Remove-Item -Force -Recurse warmup
+
+# Demote user
+USER ContainerUser
