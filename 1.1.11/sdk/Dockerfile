@@ -21,7 +21,7 @@ RUN Invoke-WebRequest $Env:DOTNET_SDK_DOWNLOAD_URL -OutFile dotnet.zip; `
 
 # In order to set system PATH, ContainerAdministrator must be used
 USER ContainerAdministrator 
-RUN setx /M PATH $($Env:PATH + ';' + $Env:ProgramFiles + '\dotnet;' + $Env:ProgramFiles + '\nodejs;' + $Env:ProgramFiles + '\git\cmd)
+RUN setx /M PATH $($Env:PATH + ';' + $Env:ProgramFiles + '\dotnet;' + $Env:ProgramFiles + '\nodejs;' + $Env:ProgramFiles + '\git\cmd')
 USER ContainerUser
 
 # Install package managers
