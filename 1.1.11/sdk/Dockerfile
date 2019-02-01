@@ -13,6 +13,8 @@ COPY --from=installer-env ["C:\\Program Files\\git", "C:\\Program Files\\git"]
 ENV DOTNET_SDK_VERSION 1.1.11
 ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev-win-x64.$DOTNET_SDK_VERSION.zip
 
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
 RUN Invoke-WebRequest $Env:DOTNET_SDK_DOWNLOAD_URL -OutFile dotnet.zip; `
     Expand-Archive dotnet.zip -DestinationPath $Env:ProgramFiles\dotnet; `
     Remove-Item -Force dotnet.zip
