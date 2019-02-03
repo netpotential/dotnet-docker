@@ -30,7 +30,7 @@ RUN npm install -g gulp bower yarn
 ENV NUGET_XMLDOC_MODE skip
 RUN New-Item -Type Directory warmup; `
     cd warmup; `
-    dotnet new; `
+    dotnet new mvc; `
     cd ..; `
     Remove-Item -Force -Recurse warmup
 
