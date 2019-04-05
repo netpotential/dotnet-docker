@@ -2,7 +2,7 @@
 FROM netpotential/dotnet:base-sdk-latest AS installer-env
 
 # SDK image
-FROM microsoft/dotnet:2.2.105-sdk
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2.105
 
 MAINTAINER dealdiane@netpotential.co.nz
     
