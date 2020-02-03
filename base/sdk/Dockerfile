@@ -1,5 +1,5 @@
 # escape=`
-FROM microsoft/windowsservercore:1909
+FROM microsoft/windows/servercore:1909
 
 MAINTAINER dealdiane@netpotential.co.nz
 
