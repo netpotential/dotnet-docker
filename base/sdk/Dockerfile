@@ -1,5 +1,5 @@
 # escape=`
-FROM mcr.microsoft.com/windows/servercore:1909
+FROM mcr.microsoft.com/windows/servercore:1809
 
 MAINTAINER dealdiane@netpotential.co.nz
 
