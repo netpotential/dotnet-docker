@@ -17,20 +17,21 @@ USER ContainerUser
 # Install chocolatey
 ENV chocolateyUseWindowsCompression false
 
-RUN [System.Net.ServicePointManager]::SecurityProtocol = 3072; \
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
+RUN powershell -Command " `
+    [System.Net.ServicePointManager]::SecurityProtocol = 3072; `
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); `
     &choco feature disable --name showDownloadProgress"
 
 # Install package managers
-RUN npm install --global gulp bower \
+RUN npm install --global gulp bower `
     choco install yarn -y
 
 # Install node build tools
 # Normally should be npm install --global --production windows-build-tools but currently hangs and doesn't finish
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\vs15_buildtools.exe
 
-RUN C:\\vs15_buildtools.exe --wait --quiet --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended \
-    Remove-Item -Force C:\vs15_buildtools.exe
+RUN C:\\vs15_buildtools.exe --wait --quiet --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended `
+    powershell -Command "Remove-Item -Force C:\vs15_buildtools.exe"
 
 # Compile sass
 RUN npm rebuild node-sass
