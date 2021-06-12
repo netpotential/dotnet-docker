@@ -26,7 +26,7 @@ RUN powershell -Command " `
 RUN npm install --global gulp bower `
     && choco install yarn -y `
     && choco install python3 -y --params "/InstallDir:C:\Python3" `
-    && setx /M PATH "%PATH%;C:\Python3;%PROGRAMFILES(Xs86)%\Yarn\bin"
+    && setx /M PATH "%PATH%;C:\Python3;%PROGRAMFILES(X86)%\Yarn\bin"
 
 # Install node build tools
 # Normally should be npm install --global --production windows-build-tools but currently hangs and doesn't finish
