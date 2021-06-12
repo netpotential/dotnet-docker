@@ -32,8 +32,8 @@ ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\vs15_buildtools.exe
 RUN C:\\vs15_buildtools.exe --wait --quiet --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended `
     && powershell -Command "Remove-Item -Force C:\vs15_buildtools.exe"
 
-# Compile sass
-RUN npm rebuild node-sass
+RUN npm install --global node-sass `
+	&& npm rebuild node-sass
 
 # Stay as admin to minimise access issues
 # USER ContainerUser
