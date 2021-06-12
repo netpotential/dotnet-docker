@@ -35,7 +35,8 @@ RUN C:\\vs15_buildtools.exe --wait --quiet --norestart --nocache --add Microsoft
 # Compile sass
 RUN npm rebuild node-sass
 
-USER ContainerUser
+# Stay as admin to minimise access issues
+# USER ContainerUser
 
 # Trigger first run experience by running arbitrary cmd to populate local package cache
 RUN dotnet help
