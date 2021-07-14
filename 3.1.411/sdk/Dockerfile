@@ -12,7 +12,7 @@ COPY --from=installer-env ["C:\\Program Files\\git", "C:\\Program Files\\git"]
 # In order to set system PATH, ContainerAdministrator must be used
 USER ContainerAdministrator 
 RUN setx /M PATH "%PATH%;C:\Program Files\nodejs;C:\Program Files\git\cmd"
-USER ContainerUser
+# USER ContainerUser
 
 # Install package managers
 RUN npm install -g gulp bower yarn
