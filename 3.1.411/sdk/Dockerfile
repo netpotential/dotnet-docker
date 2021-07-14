@@ -2,7 +2,7 @@
 FROM netpotential/dotnet:base-sdk-latest AS installer-env
 
 # SDK image
-FROM mcr.microsoft.com/dotnet/sdk:3.1.411-windowsservercore-ltsc2019
+FROM mcr.microsoft.com/dotnet/sdk:3.1.411-nanoserver-1809
 
 MAINTAINER dealdiane@netpotential.co.nz
 
