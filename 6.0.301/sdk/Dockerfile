@@ -14,26 +14,17 @@ USER ContainerAdministrator
 
 RUN setx /M PATH "%PATH%;C:\Program Files\nodejs;C:\Program Files\git\cmd;C:\Python3"
 
-# Install chocolatey
-ENV chocolateyUseWindowsCompression false
-
-RUN powershell -Command " `
-    [System.Net.ServicePointManager]::SecurityProtocol = 3072; `
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); `
-    &choco feature disable --name showDownloadProgress"
-
-# Install package managers (and Python for building native node modules)
-RUN npm install --global gulp bower yarn `
-    && choco install python3 -y --params "/InstallDir:C:\Python3" `
-    && setx /M PATH "%PATH%;C:\Python3;%PROGRAMFILES(X86)%\Yarn\bin"
-
 # Install node build tools
 # Normally should be npm install --global --production windows-build-tools but currently hangs and doesn't finish
-ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\vs15_buildtools.exe
+RUN Invoke-WebRequest https://aka.ms/vs/15/release/vs_buildtools.exe -outfile vs_BuildTools.exe; \
+    .\vs_BuildTools.exe --add Microsoft.VisualStudio.Workload.VCTools --quiet --norestart --nocache --wait --includeRecommended; \
+    if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }; \
+    Remove-Item vs_BuildTools.exe
 
-RUN C:\\vs15_buildtools.exe --wait --quiet --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended `
-    && powershell -Command "Remove-Item -Force C:\vs15_buildtools.exe"
+# Install package managers
+RUN npm install --global gulp bower yarn
 
+# Install and compile sass
 RUN npm install --global node-sass `
     && npm rebuild node-sass
 
